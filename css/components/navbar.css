@@ -87,7 +87,7 @@
     display: none;
 }
 
-@media (min-width: 780px) {
+@media (min-width: 940px) {
     .navbar .menu.extends {
         display: block;
     }
@@ -101,6 +101,21 @@
     font-size: 24px;
 }
 
+.navbar .menu.extends .login-item {
+    background-color: var(--black-fla);
+    border-radius: 10px;
+    padding: 0px 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar .menu.extends .login-item:hover {
+    transform: scale(1.1);
+}
+
+.navbar .menu.extends .login-item:hover a {
+    border-bottom: none;
+    margin-bottom: 0px;
+}
 
 /* Menu Lateral */
 .sidebar {
