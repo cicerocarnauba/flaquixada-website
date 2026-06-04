@@ -1,0 +1,42 @@
+.bolao-fla {
+    width: 100%;
+    min-width: 350px;
+    max-width: 400px;
+    margin: auto;
+    background: var(--linear-red-fla);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 15px;
+    padding: 20px;
+    gap: 15px;
+}
+
+.bolao-fla h2 {
+    text-align: center;
+    font-size: 22px;
+}
+
+.bolao-fla p {
+    text-align: center;
+}
+
+#btn-bolao-fla {
+    font-family: 'Poppins', sans-serif;
+    background-color: rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    font-weight: bold;
+    color: var(--white-fla);
+    padding: 10px 0px;
+    font-size: 16px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+#btn-bolao-fla:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#btn-bolao-fla:active {
+    transform: scale(0.9);
+}
