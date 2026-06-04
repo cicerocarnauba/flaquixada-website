@@ -1,6 +1,122 @@
-container-next-game {
+.container-next-game {
     width: 100%;
+    min-width: 350px;
+    max-width: 400px;
+    margin: auto;
+    background-color: var(--black-fla-dark);
     display: flex;
     flex-direction: column;
-    
+    border-radius: 15px;
+    padding: 20px;
+    gap: 10px;
 }
+
+/* Titulo */
+.container-next-game .title-next-game {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    align-items: center;
+}
+
+.container-next-game .title-next-game i {
+    font-size: 20px;
+}
+
+.container-next-game .title-next-game h2 {
+    font-size: 16px;
+}
+
+/* Painel */
+.container-next-game .panel-next-game {
+    width: 100%;
+    background-color: var(--black-fla);
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.container-next-game .match {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.container-next-game .match img {
+    width: 60px;
+}
+
+.container-next-game .match .time {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-next-game .match .time .name {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.container-next-game .match .vs {
+    font-size: 24px;
+    color: var(--red-fla);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.container-next-game .match-infor {
+    display: flex;
+    flex-direction: column;
+}
+
+.container-next-game .match-infor .championship-stage {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    color: var(--red-fla);
+    font-size: 12px;
+}
+
+.container-next-game .match-infor .stadium-time {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    color: var(--white-fla);
+    font-weight: bold;
+    gap: 5px;
+    font-size: 16px;
+}
+
+.container-next-game .match-infor .date-match {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 5px;
+    font-size: 12px;
+}
+
+/* Ver Mais Jogos */
+
+.see-more-block {
+    border-radius: 15px;
+    border: 1px solid var(--white-fla);
+    max-height: 300px;
+    padding: 5px;
+    display: none;
+}
+
+#btn-see-more-next-game {
+    font-family: 'Poppins', sans-serif;
+    background-color: transparent;
+    color: var(--white-fla);
+    padding: 10px 0px;
+    border: 1px solid var(--white-fla);
+    border-radius: 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+

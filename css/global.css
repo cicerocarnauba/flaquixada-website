@@ -14,6 +14,7 @@
   --red-fla-dark: #941419;
   --white-fla: #F0F0F0;
   --black-fla: #242424;
+  --black-fla-dark: #1E1E1E;
   --linear-red-fla: linear-gradient(90deg, rgba(110, 0, 0, 1) 0%, var(--red-fla) 100%);
 }
 
