@@ -3,6 +3,11 @@
     display: flex;
     flex-direction: row;
     gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.next-game:hover {
+    transform: scale(1.02);
 }
 
 .next-game .block {

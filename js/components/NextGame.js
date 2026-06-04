@@ -1,17 +1,40 @@
 class NextGame extends HTMLElement {
+    constructor(jogoData) {
+        super();
+        this.jogo = jogoData;
+    }
+
     async connectedCallback() {
         try {
-            //Busca o arquivo HTML
             const resposta = await fetch('./components_html/nextGame.html');
             const htmlPuro = await resposta.text();
 
-            //Injeta o CSS
             this.innerHTML = `
                 <link rel="stylesheet" href="./css/components/nextGame.css">
                 ${htmlPuro}
-            `
+            `;
+
+            if (this.jogo) {
+                // Injeta os dados mapeados do padrão único do JSON
+                this.querySelector('#championship').textContent = this.jogo.campeonato;
+                this.querySelector('#stage').textContent = this.jogo.faseRodada;
+                this.querySelector('#main-team').textContent = this.jogo.timeCasa;
+                this.querySelector('#visiting-team').textContent = this.jogo.timeFora;
+                this.querySelector('#date').textContent = this.jogo.dataFormatada;
+                this.querySelector('#time').textContent = this.jogo.horario + 'h';
+
+                // Lógica da barrinha: Se o Flamengo jogar em casa (Time Casa), bota a cor vermelha do Fla
+                const barrinha = this.querySelector('.block');
+                if (barrinha) {
+                    if (this.jogo.timeCasa.toUpperCase() === 'FLAMENGO') {
+                        barrinha.style.backgroundColor = 'var(--red-fla)';
+                    } else {
+                        barrinha.style.backgroundColor = 'var(--black-fla)'; 
+                    }
+                }
+            }
         } catch (error) {
-            console.error('Erro ao carregar o HTML do card-next-game:', error);
+            console.error('Erro ao carregar o HTML do next-game:', error);
         }
     }
 }
