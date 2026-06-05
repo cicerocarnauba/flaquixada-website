@@ -57,52 +57,11 @@ const proximosJogosMock = [
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Onde os componentes clonados entrarão
     const containerPrincipal = document.getElementById('match-fla');
 
     if (!containerPrincipal || proximosJogosMock.length === 0) return;
 
-    // 2. Destrincha o array: o primeiro vai pro topo, o resto vira lista
-    const [primeiroJogo, ...jogosSeguintes] = proximosJogosMock;
-
-    // 3. Renderiza o Card de Destaque no topo
-    const cardDestaque = new CardNextGame(primeiroJogo);
+    // Passa a lista COMPLETA de jogos diretamente para o construtor do componente
+    const cardDestaque = new CardNextGame(proximosJogosMock);
     containerPrincipal.appendChild(cardDestaque);
-
-    // 4. Aguarda um microssegundo para injetar a lista dentro da div interna "see-more-block" 
-    // que você deixou mapeada no seu HTML do cardNextGame
-    requestAnimationFrame(() => {
-        const blocoLista = cardDestaque.querySelector('#see-more-block');
-        
-        if (blocoLista) {
-        jogosSeguintes.forEach((jogo, index) => {
-            // Cria o componente do jogo e adiciona na lista
-            const itemLista = new NextGame(jogo);
-            blocoLista.appendChild(itemLista);
-
-            // Se NÃO for o último jogo da lista, adiciona a linha divisória (hr)
-            if (index < jogosSeguintes.length - 1) {
-                const divisor = document.createElement('hr');
-                
-                // Opcional: Você pode adicionar uma classe para estilizar essa linha no CSS
-                divisor.className = 'lista-jogos-divisor'; 
-                
-                blocoLista.appendChild(divisor);
-            }
-        });
-    }
-        
-        // Configuração opcional do botão "Ver Mais / Ver Menos"
-        const btnVerMais = cardDestaque.querySelector('#btn-see-more-next-game');
-        if (btnVerMais && blocoLista) {
-            btnVerMais.addEventListener('click', () => {
-                blocoLista.classList.toggle('expandido');
-                // Altera o texto/ícone conforme necessário para o comportamento "Ver Menos"
-                const estaExpandido = blocoLista.classList.contains('expandido');
-                btnVerMais.innerHTML = estaExpandido 
-                    ? `Ver Menos <i class="ri-arrow-up-s-line"></i>` 
-                    : `Ver Mais <i class="ri-arrow-down-s-line"></i>`;
-            });
-        }
-    });
 });

@@ -1,0 +1,114 @@
+.socio-fla {
+    width: 75%;
+    min-width: 350px; /* Alinhado ao tamanho do seu container */
+    background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin: auto;
+}
+
+/* Títulos principais */
+.socio-fla h2 {
+    color: var(--white-fla);
+    font-size: 32px;
+    font-weight: 800;
+    text-align: center;
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+.socio-fla h2 span {
+    color: var(--red-fla); 
+}
+
+.socio-fla h3 {
+    color: var(--white-fla);
+    font-size: 16px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.socio-fla .socio-card-text {
+    background: var(--red-fla);
+    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+}
+
+.socio-fla .socio-card-text p {
+    color: var(--white-fla);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    font-weight: 400;
+}
+
+#btn-socio-fla {
+    font-family: 'Poppins', sans-serif;
+    width: 100%;
+    background-color: var(--red-fla);
+    border-radius: 20px;
+    font-weight: 500;
+    color: var(--white-fla);
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#btn-socio-fla i {
+    font-size: 18px;
+}
+
+#btn-socio-fla span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#btn-socio-fla:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
+    transform: scale(1.05);
+}
+
+#btn-socio-fla:active {
+    transform: scale(0.96);
+}
+
+
+.socio-fla .socio-footer-text {
+    color: #b3b3b3; 
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.4;
+    padding: 0 10px;
+    margin-top: 5px;
+}
+
+@media (min-width: 940px) {
+    .socio-fla h2 {
+        font-size: 64px;
+    }
+
+    .socio-fla h3 {
+        font-size: 32px;
+    }
+
+    .socio-fla .socio-card-text p{
+        font-size: 16px;
+    }
+
+    .socio-fla {
+        align-items: first baseline;
+        margin-top: 40px;
+        width: 100%;
+    }
+}

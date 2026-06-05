@@ -4,8 +4,20 @@ main {
     padding: 20px 40px;
 }
 
+main .container-main {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
 main .container-main aside {
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+@media (max-width: 940px) {
+    main .container-main {
+        flex-direction: column-reverse;
+    }
 }
