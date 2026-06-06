@@ -1,0 +1,128 @@
+.monthly-prizes-card {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--red-fla);
+    border-radius: 25px;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.monthly-prizes-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    color: var(--white-fla);
+}
+
+.monthly-prizes-header h2 {
+    font-size: 20px;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.monthly-prizes-header i {
+    font-size: 22px;
+}
+
+.monthly-prizes-subtitle {
+    color: var(--white-fla);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 0;
+    padding: 0 10px;
+}
+
+.monthly-prizes-list {
+    background-color: #212121;
+    border-radius: 20px;
+    width: 100%;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    box-sizing: border-box;
+}
+
+.prizes-item {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.prizes-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--white-fla);
+    white-space: nowrap;
+}
+
+.prizes-badge i {
+    font-size: 22px;
+}
+
+.prizes-badge .prizes-position {
+    font-weight: 700;
+    font-size: 15px;
+}
+
+.prizes-description {
+    color: #e0e0e0;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: right;
+    margin: 0;
+    flex: 1;
+    line-height: 1.3;
+}
+
+#btn-compete {
+    width: 100%;
+    background-color: #212121;
+    color: var(--white-fla);
+    border: none;
+    border-radius: 20px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#btn-compete i {
+    font-size: 18px;
+}
+
+#btn-compete:hover {
+    background-color: #1a1a1a;
+    transform: translateY(-2px);
+}
+
+#btn-compete:active {
+    transform: scale(0.98);
+}
+
+.monthly-prizes-footer {
+    color: #f5f5f5;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.4;
+    font-weight: 400;
+    margin: 5px 0 0 0;
+    padding: 0 5px;
+}
