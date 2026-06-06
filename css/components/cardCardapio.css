@@ -1,0 +1,146 @@
+/* Container Principal do Card */
+.cardapio-card {
+    background-color: var(--black-fla-dark);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+/* Cabeçalho do Card */
+
+.cardapio-header h2 {
+    margin-bottom: 20px;
+    background: var(--black-fla-dark);
+    margin: -20px -20px 20px -20px;
+    border-radius: 15px 15px 0 0;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Seções (Bebidas, Petiscos, Pratos) */
+
+.cardapio-section {
+    margin-bottom: 30px;
+    background-color: var(--secundary-color-1);
+    padding: 20px; 
+    border-radius: 8px; 
+}
+
+
+/* Estilos dos subtítulos */
+.cardapio-section h3 {
+    margin-bottom: 20px;
+    background: var(--linear-red-fla);
+    
+    margin: -20px -20px 20px -20px; 
+    border-radius: 8px 8px 0 0;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.cardapio-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Cada item da lista (li) */
+.cardapio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cardapio-item:last-child {
+    border-bottom: none;
+}
+
+.item-info {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.item-nome {
+    font-weight: bold;
+    font-size: 1.05em;
+}
+
+.item-descricao {
+    font-size: 0.75em;
+    color: #999;
+    margin-top: 2px;
+}
+
+/* Tabela de Preços*/
+.tabela-precos {
+    display: grid;
+    grid-template-columns: 80px 10px 80px;
+    align-items: center;
+    justify-content: end;
+    text-align: center;
+}
+
+.col-socio, .col-normal {
+    font-size: 0.95em;
+}
+
+.col-divisor {
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.9em;
+}
+
+/* Cores específicas da linha do item */
+.preco-destaque {
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.preco-comum {
+    color: var(--secundary-color-2);
+}
+
+/* Ajustes apenas para o cabeçalho h3 */
+.cardapio-section h3 .col-socio, 
+.cardapio-section h3 .col-normal {
+    font-size: 0.8em;
+    font-weight: bold;
+    color: var(--secundary-color-2);
+}
+
+/* Rodapé e Botão */
+.cardapio-footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.btn-cardapio-completo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #333;
+    color: var(--secundary-color-2);
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 0.95em;
+    text-decoration: none;
+    transition: background-color 0.3s ease, transform 0.5s ease;
+}
+
+.btn-cardapio-completo:hover {
+    background-color: #444;
+    transform: scale(1.1);
+}
+
+.btn-cardapio-completo i {
+    font-size: 1.2em;
+}
