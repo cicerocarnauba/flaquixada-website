@@ -1,13 +1,12 @@
 .socio-fla {
-    width: 75%;
-    min-width: 350px; /* Alinhado ao tamanho do seu container */
+    width: 100%;
+    min-width: 350px;
     background-color: transparent;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin: auto;
 }
 
 /* Títulos principais */
@@ -76,7 +75,7 @@
 
 #btn-socio-fla:hover {
     background-color: rgba(0, 0, 0, 0.5); 
-    transform: scale(1.05);
+    /* transform: scale(1.05); */
 }
 
 #btn-socio-fla:active {

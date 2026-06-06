@@ -5,19 +5,36 @@ main {
 }
 
 main .container-main {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: 1fr 400px; 
     gap: 30px;
 }
 
+main .container-main section, 
 main .container-main aside {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+    display: contents;
 }
+
+div-socio-fla { grid-column: 1; grid-row: 1; }
+card-cardapio { grid-column: 1; grid-row: 2; }
+#match-fla    { grid-column: 2; grid-row: 1; }
+bolao-fla     { grid-column: 2; grid-row: 2; }
 
 @media (max-width: 940px) {
     main .container-main {
+        display: flex;
         flex-direction: column-reverse;
+        gap: 30px;
+        align-items: center;
+        width: 100%;
+    }
+    
+    main .container-main section, 
+    main .container-main aside {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: center;
+        width: 100%;
     }
 }

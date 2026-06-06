@@ -65,22 +65,27 @@
 }
 
 .navbar .menu.compressed li:hover {
-    padding-bottom: 5px;
+    transform: scale(1.1);
 }
 
-
-.navbar .menu a {
-    padding: 5px;
+.navbar .menu.extends a {
+    padding: 5px 10px;
     transition: all 0.3s ease;
 }
 
-.navbar .menu a:hover {
-    margin-bottom: 10px;
-    border-bottom: 2px solid var(--secundary-color-2);
+.navbar .menu.extends a:hover {
+    text-shadow: 0 0 1px currentColor, 0 0 1px currentColor;
+    background-color: rgba(36, 36, 36, 0.4);
+    border-radius: 8px;
 }
 
-.navbar .menu a:active {
+.navbar .menu.extends a:active {
     transform: scale(0.9);
+}
+
+.navbar .menu.compressed a {
+    padding: 5px;
+    color: var(--secundary-color-2);
 }
 
 .navbar .menu.extends {
@@ -109,12 +114,15 @@
 }
 
 .navbar .menu.extends .login-item:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    background-color: var(--black-fla-dark);
 }
 
 .navbar .menu.extends .login-item:hover a {
-    border-bottom: none;
-    margin-bottom: 0px;
+    color: var(--secundary-color-2);
+    background-color: transparent;
+    text-shadow: none;
+    font-weight: bold;
 }
 
 /* Menu Lateral */
@@ -130,7 +138,7 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    transition: right 0.4s ease-in-out; /* Animação suave deslizando */
+    transition: right 0.4s ease-in-out; 
 }
 
 .sidebar.active {
@@ -174,20 +182,25 @@
     border-radius: 8px;
     font-size: 18px;
     font-weight: 400;
-    transition: background 0.2s ease, padding-left 0.2s ease;
+    transition: background 0.2s ease, text-shadow 0.2s ease;
 }
 
 .sidebar-links li a:hover {
-    background: rgba(255, 255, 255, 0.1);
-    padding-left: 20px;
+    background: rgba(36, 36, 36, 0.4); 
+    text-shadow: 0 0 1px currentColor, 0 0 1px currentColor;
 }
 
 .sidebar-links i {
     font-size: 22px;
 }
 
-.login-item a {
-    font-weight: 600;
+.sidebar-links li.login-item a {
+    background-color: var(--secundary-color-1);
+}
+
+.sidebar-links li.login-item a:hover {
+    background-color: var(--black-fla-dark);
+    text-shadow: none;
 }
 
 .sidebar-divider {
