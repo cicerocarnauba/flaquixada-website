@@ -2,12 +2,14 @@
     width: 100%;
     min-width: 350px;
     max-width: 400px;
+    flex: 1;
     background-color: var(--black-fla-dark);
     display: flex;
     flex-direction: column;
     border-radius: 15px;
     padding: 20px;
     gap: 10px;
+    box-sizing: border-box;
 }
 
 /* Titulo */
@@ -131,11 +133,19 @@
     font-size: 16px;
     font-weight: bold;
     transition: all 0.3s ease;
+    margin-top: auto;
+    cursor: pointer;
 }
 
 #btn-see-more-next-game:hover {
     color: var(--black-fla);
     background-color: var(--white-fla);
+}
+
+@media (min-width: 940px) {
+    .container-next-game {
+        margin-top: 40px;
+    }
 }
 
 

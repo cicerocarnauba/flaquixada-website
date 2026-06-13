@@ -10,27 +10,29 @@ main .container-main {
     gap: 30px;
 }
 
-main .container-main section, 
-main .container-main aside {
-    display: contents;
+#match-fla { 
+    display: flex;
+    flex-direction: column;
 }
 
-div-socio-fla { grid-column: 1; grid-row: 1; }
-card-cardapio { grid-column: 1; grid-row: 2; }
-#match-fla    { grid-column: 2; grid-row: 1; }
-bolao-fla     { grid-column: 2; grid-row: 2; }
+#match-fla card-next-game {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.side-widgets {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+main .container-sec {
+    margin-top: 40px;
+}
 
 @media (max-width: 940px) {
     main .container-main {
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 30px;
-        align-items: center;
-        width: 100%;
-    }
-    
-    main .container-main section, 
-    main .container-main aside {
         display: flex;
         flex-direction: column;
         gap: 30px;

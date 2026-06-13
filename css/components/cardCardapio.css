@@ -5,6 +5,7 @@
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
     width: 100%;
+    
 }
 
 /* Cabeçalho do Card */
@@ -123,22 +124,26 @@
 }
 
 .btn-cardapio-completo {
-    display: inline-flex;
+    display: flex;
+    justify-content: center;
     align-items: center;
     gap: 10px;
-    background-color: #333;
-    color: var(--secundary-color-2);
-    padding: 12px 24px;
-    border-radius: 12px;
+    background-color: transparent;
+    color: var(--white-fla);
+    width: 100%;
+    padding: 10px 0px;
+    border: 1px solid var(--white-fla);
+    border-radius: 15px;
     font-weight: bold;
-    font-size: 0.95em;
+    font-size: 16px;
     text-decoration: none;
-    transition: background-color 0.3s ease, transform 0.5s ease;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
 }
 
 .btn-cardapio-completo:hover {
-    background-color: #444;
-    transform: scale(1.1);
+    color: var(--black-fla);
+    background-color: var(--white-fla);
 }
 
 .btn-cardapio-completo i {
