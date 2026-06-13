@@ -1,7 +1,5 @@
 .bolao-fla {
     width: 100%;
-    min-width: 350px;
-    max-width: 400px;
     background: var(--linear-red-fla);
     display: flex;
     flex-direction: column;
