@@ -1,3 +1,12 @@
+if (!localStorage.getItem('user')) {
+    const adminFalso = {
+        name: "Admin Provisório",
+        role: "admin",
+        token: "mocked-jwt-token-xyz123"
+    };
+    localStorage.setItem('user', JSON.stringify(adminFalso));
+}
+
 /* Jogos Testes */
 const proximosJogosMock = [
   {
