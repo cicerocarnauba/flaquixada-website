@@ -1,6 +1,6 @@
 import dotenv from "dotenv";
 import { MongoClient } from "mongodb";
-import { createUserIndexes } from "./users";
+import { createUserIndexes } from "./indexes/users.js";
 
 dotenv.config();
 
@@ -13,7 +13,7 @@ export async function conectarBanco() {
     db = client.db();
     console.log("🌱 MongoDB Conectado Nativamente com sucesso!");
 
-    await createUserIndexes();
+    await createUserIndexes(db);
     // await db.collection("users").insertOne({
     //   email: "randsonalves77@gmail.com",
     //   password: bcrypt.hashSync("12345678", 10),
