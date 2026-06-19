@@ -1,8 +1,12 @@
 class AdminHeader extends HTMLElement {
     async connectedCallback() {
         try {
-            const response = await fetch('./components_html/adminHeader.html');
-            const pureHtml = await response.text();
+            let pureHtml = sessionStorage.getItem('adminHeaderCache');
+            if (!pureHtml) {
+                const response = await fetch('./components_html/adminHeader.html');
+                pureHtml = await response.text();
+                sessionStorage.setItem('adminHeaderCache', pureHtml);
+            }
 
             this.innerHTML = `
                 <link rel="stylesheet" href="./css/components/adminHeader.css">

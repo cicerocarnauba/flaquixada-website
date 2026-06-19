@@ -1,8 +1,12 @@
 class AdminSidebar extends HTMLElement {
     async connectedCallback() {
         try {
-            const response = await fetch('./components_html/adminSidebar.html');
-            const pureHtml = await response.text();
+            let pureHtml = sessionStorage.getItem('adminSidebarCache');
+            if (!pureHtml) {
+                const response = await fetch('./components_html/adminSidebar.html');
+                pureHtml = await response.text();
+                sessionStorage.setItem('adminSidebarCache', pureHtml);
+            }
 
             this.innerHTML = `
                 <link rel="stylesheet" href="./css/components/adminSidebar.css">
