@@ -9,12 +9,23 @@ class AdminHeader extends HTMLElement {
                 ${pureHtml}
             `;
 
-            // Lógica de logout
+            // Lógica de Logout
             const btnLogout = this.querySelector('#btn-admin-logout');
             if (btnLogout) {
                 btnLogout.addEventListener('click', () => {
-                    // Aqui iria a lógica de limpar sessão/token
-                    window.location.href = '../index.html'; // Redireciona pro site público
+                    // TODO: Adicionar lógica real de logout (limpar storage/cookies)
+                    window.location.href = '../index.html';
+                });
+            }
+
+            // Lógica do Menu Hamburger (Mobile)
+            const btnMenu = this.querySelector('#btn-admin-menu');
+            if (btnMenu) {
+                btnMenu.addEventListener('click', () => {
+                    const sidebar = document.querySelector('.admin-sidebar');
+                    if (sidebar) {
+                        sidebar.classList.add('active');
+                    }
                 });
             }
         } catch (error) {

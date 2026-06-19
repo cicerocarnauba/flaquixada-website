@@ -36,6 +36,23 @@ class AdminSidebar extends HTMLElement {
             const dashLink = this.querySelector('#link-dashboard');
             if (dashLink) dashLink.classList.add('active');
         }
+
+        // Lógica do botão Fechar Menu (Mobile)
+        const btnClose = this.querySelector('#close-admin-menu');
+        if (btnClose) {
+            btnClose.addEventListener('click', () => {
+                const sidebar = this.querySelector('.admin-sidebar');
+                if (sidebar) sidebar.classList.remove('active');
+            });
+        }
+
+        // Lógica de Logout no Menu Mobile
+        const btnLogoutMobile = this.querySelector('#btn-admin-logout-mobile');
+        if (btnLogoutMobile) {
+            btnLogoutMobile.addEventListener('click', () => {
+                window.location.href = '../index.html';
+            });
+        }
     }
 }
 

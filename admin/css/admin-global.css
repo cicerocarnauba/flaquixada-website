@@ -23,7 +23,6 @@ admin-sidebar {
 admin-header {
     display: block;
     min-height: 73px;
-    background: var(--linear-red-fla);
 }
 
 /* Layout Principal */
@@ -87,7 +86,31 @@ admin-header {
     background: var(--black-fla);
     border-color: var(--black-fla);
 }
+/* Responsividade e Mobile */
+.mobile-only { display: none !important; }
+.desktop-only { display: flex !important; }
 
+@media (max-width: 768px) {
+    .mobile-only { display: flex !important; }
+    .desktop-only { display: none !important; }
+
+    .admin-container {
+        flex-direction: column;
+        padding: 16px;
+        gap: 16px;
+    }
+    
+    admin-sidebar {
+        min-width: unset;
+        width: 0;
+        height: 0;
+        overflow: visible;
+    }
+
+    admin-header {
+        min-height: 56px;
+    }
+}
 .btn-primary:active {
     transform: scale(0.9);
 }

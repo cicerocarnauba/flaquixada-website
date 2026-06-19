@@ -54,3 +54,60 @@
 .admin-menu li a.active i {
     color: var(--white-fla);
 }
+
+.sidebar-header-mobile {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .sidebar-header-mobile {
+        display: flex;
+        justify-content: flex-end; /* Apenas o botão de fechar */
+        align-items: center;
+        margin-bottom: 24px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--admin-border);
+    }
+    
+    .sidebar-header-mobile h3 {
+        display: none; /* Removido o título Módulos */
+    }
+
+    #close-admin-menu {
+        background: transparent;
+        border: none;
+        color: var(--white-fla);
+        font-size: 28px; /* Maior para toque */
+        cursor: pointer;
+    }
+
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        bottom: 0;
+        width: 300px;
+        z-index: 1000;
+        transition: right 0.4s ease;
+        border-radius: 0;
+        border: none;
+        border-left: 1px solid var(--admin-border);
+        padding: 20px;
+    }
+
+    .admin-sidebar.active {
+        right: 0;
+    }
+
+    /* Ajuste do tamanho das fontes para ficar igual ao do site público */
+    .admin-menu li a {
+        font-size: 18px;
+        font-weight: 400;
+        padding: 12px 15px;
+        gap: 20px;
+    }
+
+    .admin-menu li a i {
+        font-size: 22px;
+    }
+}
