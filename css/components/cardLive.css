@@ -1,6 +1,5 @@
 .container-card-live {
     width: 100%;
-    min-width: 350px;
     flex: 1;
     background-color: var(--black-fla-dark);
     display: flex;
@@ -54,7 +53,7 @@
 }
 
 .container-card-live .championship-time-stage p{
-    width: 77px;
+    flex: 1;
     text-align: center;
 }
 
