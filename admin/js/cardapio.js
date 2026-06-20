@@ -125,6 +125,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (form) {
             form.addEventListener('submit', salvarItem);
         }
+
+        // Aplica os eventos de máscara globais
+        const inputNome = document.getElementById('item-nome');
+        const inputNormal = document.getElementById('item-preco-normal');
+        const inputSocio = document.getElementById('item-preco-socio');
+        
+        if (inputNome) inputNome.addEventListener('input', mascaraTextoENumeros);
+        if (inputNormal) inputNormal.addEventListener('input', mascaraMoeda);
+        if (inputSocio) inputSocio.addEventListener('input', mascaraMoeda);
     }, 500);
 
     function limparFormulario() {
@@ -145,8 +154,8 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('item-id').value = item.id;
         document.getElementById('item-nome').value = item.nome;
         document.getElementById('item-desc').value = item.descricao;
-        document.getElementById('item-preco-socio').value = item.precoSocio;
-        document.getElementById('item-preco-normal').value = item.precoNormal;
+        document.getElementById('item-preco-socio').value = formatarMoedaInput(item.precoSocio);
+        document.getElementById('item-preco-normal').value = formatarMoedaInput(item.precoNormal);
         document.getElementById('item-categoria').value = categoria;
         
         document.getElementById('modal-titulo').innerText = 'Editar Item';
@@ -163,8 +172,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const id = document.getElementById('item-id').value;
         const nome = document.getElementById('item-nome').value;
         const descricao = document.getElementById('item-desc').value;
-        const precoSocio = parseFloat(document.getElementById('item-preco-socio').value);
-        const precoNormal = parseFloat(document.getElementById('item-preco-normal').value);
+        const precoNormal = desmascararMoeda(document.getElementById('item-preco-normal').value);
+        const precoSocio = desmascararMoeda(document.getElementById('item-preco-socio').value);
         const categoriaNova = document.getElementById('item-categoria').value;
 
         const novoItem = {
