@@ -3,52 +3,116 @@ import './components/AdminSidebar.js';
 import './components/AdminHeader.js';
 import './components/ModalAdministradores.js';
 
-console.log("Interface de Gerenciamento de Administradores carregada com sucesso.");
+import { obterAdminsLocal, salvarAdminsLocal } from '../../js/utils/mockAdministradores.js';
 
-// Como os componentes Web são carregados de forma assíncrona, aguardamos um breve momento
-setTimeout(() => {
-    inicializarEventosInterface();
-}, 100);
+let adminsAtual = [];
+const containerLista = document.getElementById('admin-list-container');
+const btnNovoAdmin = document.getElementById('btn-novo-admin');
+let modalComponent = null;
 
-function inicializarEventosInterface() {
-    const btnNovoAdmin = document.getElementById('btn-novo-admin');
-    const modalComponent = document.querySelector('modal-administradores');
+document.addEventListener('DOMContentLoaded', () => {
 
-    if (!modalComponent) {
-        console.error("Componente <modal-administradores> não encontrado no DOM.");
-        return;
-    }
+    setTimeout(() => {
+        modalComponent = document.querySelector('modal-administradores');
+        inicializarEventosGlobais();
+        carregarDados();
+    }, 100);
+});
 
-    // Evento de abrir o modal vazio para criação
-    if (btnNovoAdmin) {
+function carregarDados() {
+    adminsAtual = obterAdminsLocal();
+    renderizarAdmins();
+}
+
+function inicializarEventosGlobais() {
+    if (btnNovoAdmin && modalComponent) {
         btnNovoAdmin.addEventListener('click', () => {
             modalComponent.abrirModal();
         });
     }
 
-    // Evento de abrir o modal preenchido para edição (usando a lista estática atual)
-    const botoesEditar = document.querySelectorAll('.btn-icon.edit');
-    botoesEditar.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            // Pega o card pai para extrair o nome e email do HTML
-            const card = e.target.closest('.admin-card-item');
-            if (card) {
-                const nome = card.querySelector('.admin-name').textContent;
-                const email = card.querySelector('.admin-email').textContent;
-                
-                modalComponent.abrirModal({
-                    id: '1', // ID Fictício
-                    nome: nome,
-                    email: email
-                });
+    if (modalComponent) {
+        modalComponent.addEventListener('salvar-admin', (e) => {
+            const dados = e.detail;
+            salvarAdministrador(dados);
+        });
+    }
+}
+
+function renderizarAdmins() {
+    if (!containerLista) return;
+    containerLista.innerHTML = '';
+
+    if (adminsAtual.length === 0) {
+        containerLista.innerHTML = '<p style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px;">Nenhum administrador cadastrado.</p>';
+        return;
+    }
+
+    adminsAtual.forEach(admin => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'admin-card-item';
+        
+        itemDiv.innerHTML = `
+            <div class="admin-info">
+                <div class="admin-avatar">
+                    <i class="ri-user-fill"></i>
+                </div>
+                <div class="admin-details">
+                    <span class="admin-name">${admin.nome}</span>
+                    <span class="admin-email">${admin.email}</span>
+                </div>
+            </div>
+            <div class="admin-actions">
+                <button class="btn-icon edit" title="Editar"><i class="ri-pencil-line"></i></button>
+                <button class="btn-icon delete" title="Excluir"><i class="ri-delete-bin-line"></i></button>
+            </div>
+        `;
+
+        // Eventos
+        const btnEdit = itemDiv.querySelector('.edit');
+        const btnDelete = itemDiv.querySelector('.delete');
+
+        btnEdit.addEventListener('click', () => {
+            if (modalComponent) modalComponent.abrirModal(admin);
+        });
+
+        btnDelete.addEventListener('click', () => {
+            if (confirm(`Tem certeza que deseja excluir o administrador(a) ${admin.nome}?`)) {
+                excluirAdmin(admin.id);
             }
         });
-    });
 
-    // Escuta o evento Customizado disparado pelo Modal ao enviar o Formulário
-    modalComponent.addEventListener('salvar-admin', (e) => {
-        const dados = e.detail;
-        console.log("Interface capturou os dados a serem salvos:", dados);
-        alert(`Formulário enviado!\nNome: ${dados.nome}\nE-mail: ${dados.email}\n`);
+        containerLista.appendChild(itemDiv);
     });
+}
+
+function salvarAdministrador(dadosNovos) {
+    const index = adminsAtual.findIndex(a => a.id === dadosNovos.id);
+    
+    if (index !== -1) {
+        // Editando existente
+        // Se a senha veio vazia, mantemos a senha antiga
+        if (!dadosNovos.senha) {
+            dadosNovos.senha = adminsAtual[index].senha;
+        }
+        adminsAtual[index] = { ...adminsAtual[index], ...dadosNovos };
+    } else {
+        // Criando novo
+        adminsAtual.push(dadosNovos);
+    }
+    
+    salvarAdminsLocal(adminsAtual);
+    renderizarAdmins();
+}
+
+function excluirAdmin(id) {
+    // Evita excluir o único administrador
+    if (adminsAtual.length <= 1) {
+        alert("Atenção: Não é possível excluir o único administrador do sistema.");
+        return;
+    }
+    
+    adminsAtual = adminsAtual.filter(a => a.id !== id);
+    salvarAdminsLocal(adminsAtual);
+    renderizarAdmins();
 }
