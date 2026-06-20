@@ -5,7 +5,7 @@ const listaProdutos = [
         titulo: "Camisa do Consulado",
         descricao: "Venha garantir sua camisa e se junte com a melhor torcida de Quixadá!",
         preco: "120,00 R$",
-        imagem: "https://imgcentauro-a.akamaihd.net/1024x1024/9973SK2VA12.jpg" // 
+        imagem: "https://imgcentauro-a.akamaihd.net/1024x1024/9973SK2VA12.jpg" 
     },
     {
         id: 2,
@@ -24,17 +24,20 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    containerProdutos.innerHTML = "";
+    // Aguarda 1.5 segundos exibindo o skeleton antes de injetar os itens
+    setTimeout(() => {
+        containerProdutos.innerHTML = "";
 
-    listaProdutos.forEach(produto => {
-        const novoCard = document.createElement("card-item-fla");
-        
-        // Configura os atributos que o componente espera receber
-        novoCard.setAttribute("img", produto.imagem);
-        novoCard.setAttribute("title", produto.titulo);
-        novoCard.setAttribute("description", produto.descricao);
-        novoCard.setAttribute("price", produto.preco);
+        listaProdutos.forEach(produto => {
+            const novoCard = document.createElement("card-item-fla");
+            
+            // Configura os atributos que o componente espera receber
+            novoCard.setAttribute("img", produto.imagem);
+            novoCard.setAttribute("title", produto.titulo);
+            novoCard.setAttribute("description", produto.descricao);
+            novoCard.setAttribute("price", produto.preco);
 
-        containerProdutos.appendChild(novoCard);
-    });
+            containerProdutos.appendChild(novoCard);
+        });
+    }, 1500);
 });

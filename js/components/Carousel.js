@@ -32,6 +32,7 @@ class Carousel extends HTMLElement {
 
         // Função central para mudar de slide
         const goToSlide = (index) => {
+            // Faz o carrossel ser infinito (volta pro começo ou vai pro fim)
             currentIndex = (index + totalSlides) % totalSlides;
 
             track.style.transform = `translateX(-${currentIndex * 100}%)`;
