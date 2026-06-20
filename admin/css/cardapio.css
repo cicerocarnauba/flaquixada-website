@@ -1,6 +1,3 @@
-/* --- Atalhos (Shortcuts) --- */
-
-/* --- Atalhos (Shortcuts) --- */
 .cardapio-shortcuts {
     display: flex;
     gap: 12px;
@@ -92,25 +89,4 @@
     .form-row > .form-group { flex: 1 1 100%; margin-bottom: 14px; }
     .admin-item { flex-direction: column; align-items: flex-start; gap: 16px; }
     .item-acoes { align-self: flex-end; }
-    
-    /* Botão Novo Item Responsivo */
-    #btn-novo-item .btn-text {
-        display: none;
-    }
-    
-    #btn-novo-item {
-        background: var(--red-fla);
-        color: var(--white-fla);
-        border-color: var(--red-fla);
-        padding: 8px;
-        width: 40px;
-        height: 40px;
-        justify-content: center;
-        border-radius: 8px;
-    }
-    
-    #btn-novo-item:active {
-        background: black;
-        border-color: black;
-    }
 }

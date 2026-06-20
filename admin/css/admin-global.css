@@ -43,8 +43,10 @@ admin-header {
     display: flex;
     gap: 24px;
     padding: 32px 40px;
+    width: 100%;
     max-width: 1400px;
     margin: 0 auto;
+    box-sizing: border-box;
 }
 
 .admin-card {
@@ -214,6 +216,15 @@ admin-header {
         gap: 16px;
     }
     
+    .admin-main {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .admin-main-header h2 {
+        font-size: 1.25rem;
+    }
+    
     admin-sidebar {
         min-width: unset;
         width: 0;
@@ -223,6 +234,30 @@ admin-header {
 
     admin-header {
         min-height: 56px;
+    }
+
+    /* Botão Primário Responsivo (Headers) */
+    .admin-main-header .btn-primary .btn-text {
+        display: none;
+    }
+    
+    .admin-main-header .btn-primary {
+        background: var(--red-fla);
+        color: var(--white-fla);
+        border-color: var(--red-fla);
+        padding: 0;
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 8px;
+        font-size: 1.5rem; /* Ícone maior */
+    }
+    
+    .admin-main-header .btn-primary:active {
+        background: black;
+        border-color: black;
     }
 }
 .btn-primary:active {
