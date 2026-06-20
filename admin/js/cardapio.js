@@ -107,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ----- ABERTURA DO MODAL (NOVO) -----
+    // ----- ABERTURA DO MODAL-----
     if (btnNovo) {
         btnNovo.addEventListener('click', () => {
             limparFormulario();
