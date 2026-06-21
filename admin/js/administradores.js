@@ -86,23 +86,57 @@ function renderizarAdmins() {
     });
 }
 
-function salvarAdministrador(dadosNovos) {
+async function salvarAdministrador(dadosNovos) {
     const index = adminsAtual.findIndex(a => a.id === dadosNovos.id);
     
     if (index !== -1) {
-        // Editando existente
-        // Se a senha veio vazia, mantemos a senha antiga
+        // Editando existente (Mock Local)
         if (!dadosNovos.senha) {
             dadosNovos.senha = adminsAtual[index].senha;
         }
         adminsAtual[index] = { ...adminsAtual[index], ...dadosNovos };
+        salvarAdminsLocal(adminsAtual);
+        renderizarAdmins();
     } else {
-        // Criando novo
-        adminsAtual.push(dadosNovos);
+        // Criando novo - Envia para a API Real
+        try {
+            const token = localStorage.getItem('adminToken');
+            const response = await fetch('http://localhost:4000/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ 
+                    email: dadosNovos.email, 
+                    password: dadosNovos.senha,
+                    role: 'admin' // Definindo o nível padrão do novo admin
+                })
+            });
+
+            const data = await response.json();
+
+            if (response.ok && data.success) {
+                alert('Administrador cadastrado com sucesso no banco de dados!');
+                
+                // Atualiza o mock local para refletir na tabela imediatamente
+                dadosNovos.id = data.data.id; // Usa o ID gerado pelo MongoDB
+                adminsAtual.push(dadosNovos);
+                salvarAdminsLocal(adminsAtual);
+                renderizarAdmins();
+            } else {
+                let errorMsg = data.error || 'Erro ao registrar administrador.';
+                if (data.detalhes) {
+                    const mensagens = Object.values(data.detalhes).flat().join('\\n');
+                    errorMsg += '\\n' + mensagens;
+                }
+                alert(errorMsg);
+            }
+        } catch (error) {
+            console.error('Erro de conexão ao registrar:', error);
+            alert('Erro de conexão com o backend. O servidor está rodando?');
+        }
     }
-    
-    salvarAdminsLocal(adminsAtual);
-    renderizarAdmins();
 }
 
 function excluirAdmin(id) {
