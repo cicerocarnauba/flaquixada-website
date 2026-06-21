@@ -79,7 +79,7 @@ function renderizarAdmins() {
     containerLista.innerHTML = '';
 
     if (adminsAtual.length === 0) {
-        containerLista.innerHTML = '<p style="color: rgba(255,255,255,0.6); text-align: center; padding: 20px;">Nenhum administrador cadastrado.</p>';
+        containerLista.innerHTML = '<p class="empty-state-message">Nenhum administrador cadastrado.</p>';
         return;
     }
 

@@ -38,6 +38,11 @@ admin-header {
     min-height: 73px;
 }
 
+admin-perfil {
+    display: block;
+    flex: 1;
+}
+
 /* Layout Principal */
 .admin-container {
     display: flex;
@@ -64,8 +69,10 @@ admin-header {
 
 .admin-main-header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
+    gap: 12px;
     margin-bottom: 32px;
     padding-bottom: 16px;
     border-bottom: 1px solid var(--admin-border);
@@ -127,7 +134,7 @@ admin-header {
     position: fixed; inset: 0;
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(4px);
-    display: flex; align-items: center; justify-content: center;
+    display: none; align-items: center; justify-content: center;
     z-index: 1000;
 }
 
@@ -171,7 +178,11 @@ admin-header {
 }
 
 .admin-modal-actions {
-    display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
 }
 
 .admin-modal-actions .btn-primary {
@@ -259,7 +270,42 @@ admin-header {
         background: black;
         border-color: black;
     }
+
+    /* Modal responsivo */
+    .admin-modal-content {
+        margin: 16px;
+        max-width: calc(100vw - 32px);
+        padding: 16px;
+    }
+
+    .admin-modal-actions {
+        flex-direction: column;
+    }
+
+    .admin-modal-actions .btn-primary,
+    .admin-modal-actions .btn-secundary {
+        width: 100%;
+        justify-content: center;
+    }
 }
 .btn-primary:active {
     transform: scale(0.9);
+}
+
+.admin-header-logo-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.sidebar-mobile-logout {
+    margin-top: auto;
+    padding-top: 24px;
+    border-top: 1px solid var(--admin-border);
+}
+
+.btn-logout-mobile {
+    width: 100%;
 }
