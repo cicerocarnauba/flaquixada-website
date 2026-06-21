@@ -6,11 +6,11 @@ class NextGame extends HTMLElement {
 
     async connectedCallback() {
         try {
-            const resposta = await fetch('/components_html/nextGame.html');
+            const resposta = await fetch('./components_html/nextGame.html');
             const htmlPuro = await resposta.text();
 
             this.innerHTML = `
-                <link rel="stylesheet" href="/css/components/nextGame.css">
+                <link rel="stylesheet" href="./css/components/nextGame.css">
                 ${htmlPuro}
             `;
 
