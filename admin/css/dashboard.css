@@ -105,3 +105,107 @@
 .btn-quick-action:hover i {
     color: var(--white-fla);
 }
+
+/* Bolao State Buttons */
+.btn-state {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
+    color: var(--white-fla);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+.btn-state i {
+    font-size: 1.2rem;
+}
+.btn-state:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+@media (max-width: 600px) {
+    .dashboard-bolao-status .bolao-state-buttons-group {
+        display: none !important;
+    }
+    .dashboard-bolao-status .bolao-widget-title {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        gap: 4px !important;
+    }
+}
+
+.dashboard-bolao-status {
+    padding: 20px;
+    background: var(--black-fla);
+    border: 1px solid var(--admin-border);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.dashboard-bolao-status-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.bolao-widget-title {
+    margin: 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bolao-widget-title span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.bolao-widget-title i {
+    color: var(--red-fla);
+}
+
+.bolao-widget-status {
+    color: var(--white-fla);
+    text-transform: uppercase;
+}
+
+.btn-manage-bolao {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: fit-content;
+}
+
+.bolao-state-buttons-group {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Active styles matching bolao.css */
+.btn-state.active.btn-inativo {
+    background: #555;
+    border-color: #555;
+}
+.btn-state.active.btn-aberto {
+    background: #28a745;
+    border-color: #28a745;
+}
+.btn-state.active.btn-fechado {
+    background: var(--red-fla);
+    border-color: var(--red-fla);
+}

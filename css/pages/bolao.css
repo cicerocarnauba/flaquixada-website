@@ -51,6 +51,14 @@
     box-shadow: 0 4px 10px rgba(0,0,0,0.2) !important;
 }
 
+@media (max-width: 768px) {
+    .bolao-jogo-atual .panel-next-game .championship-stage {
+        font-size: 11px !important;
+        padding: 4px 12px !important;
+        white-space: normal !important;
+    }
+}
+
 /* VS Branco */
 .bolao-jogo-atual .panel-next-game .vs {
     color: var(--white-fla) !important;
@@ -139,8 +147,30 @@
     text-align: right;
 }
 
+.bolao-participan.btn-state.active.btn-fechado {
+    background: var(--red-fla);
+    border-color: var(--red-fla);
+}
+
+.bolao-blind-bet-text {
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.bolao-novo-input-margin {
+    margin-bottom: 12px;
+}
+
 .bolao-participant-name.taken {
-    color: #fbbf24; /* Dourado Premium */
+    background: var(--black-fla);
+    color: var(--white-fla);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    display: inline-block;
 }
 
 .bolao-participant-name.free {
@@ -193,6 +223,7 @@
 .btn-bolao-salvar {
     background: #000;
     color: var(--white-fla);
+    margin-top: 12px;
 }
 
 .btn-bolao-salvar:hover {
@@ -209,6 +240,26 @@
 @media (max-width: 600px) {
     .bolao-participants-card {
         padding: 20px;
+    }
+    .bolao-page-content {
+        width: calc(100% - 30px);
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 400px) {
+    .bolao-participant-row {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .bolao-participant-info {
+        text-align: left;
+        width: 100%;
+    }
+    .bolao-page-content {
+        padding: 16px 12px 40px;
+        border-radius: 14px;
+        width: calc(100% - 20px);
     }
 }
 
@@ -246,4 +297,18 @@
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+.bolao-revelados-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.bolao-revelados-header h3 {
+    color: white;
+}
+
+.bolao-revelados-header p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
 }

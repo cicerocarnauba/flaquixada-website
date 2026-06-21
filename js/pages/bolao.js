@@ -5,26 +5,31 @@ import '../components/NextGame.js';
 import '../components/CardNextGame.js';
 import '../components/Footer.js';
 
-const jogadoresFlamengo = [
-    { id: 1, nomeJogador: "Varela", participante: "Randson" },
-    { id: 2, nomeJogador: "Fabrício Bruno", participante: "" },
-    { id: 3, nomeJogador: "Léo Pereira", participante: "Henry" },
-    { id: 4, nomeJogador: "Ayrton Lucas", participante: "" },
-    { id: 5, nomeJogador: "Erick Pulgar", participante: "" },
-    { id: 6, nomeJogador: "De La Cruz", participante: "" },
-    { id: 7, nomeJogador: "Gerson", participante: "Rudrigu" },
-    { id: 8, nomeJogador: "Arrascaeta", participante: "" },
-    { id: 9, nomeJogador: "Everton Cebolinha", participante: "" },
-    { id: 10, nomeJogador: "Pedro", participante: "" },
-];
+function getBolaoState() {
+    return localStorage.getItem('bolao_mock_state') || 'INATIVO';
+}
 
-let currentBolaoState = 'PADRAO'; // 'INATIVO', 'AGUARDANDO', 'PADRAO'
+function getBolaoJogadores() {
+    const saved = localStorage.getItem('bolao_mock_jogadores');
+    if (saved) return JSON.parse(saved);
+    
+    // Default de segurança
+    const iniciais = [];
+    for(let i=1; i<=10; i++) iniciais.push({ id: i, nomeJogador: "", participante: "" });
+    return iniciais;
+}
+
+function saveBolaoJogadores(jogadores) {
+    localStorage.setItem('bolao_mock_jogadores', JSON.stringify(jogadores));
+}
 
 function renderBolaoState() {
     const container = document.getElementById('bolao-dynamic-container');
     if (!container) return;
 
-    if (currentBolaoState === 'INATIVO') {
+    const state = getBolaoState();
+
+    if (state === 'INATIVO') {
         container.innerHTML = `
             <div class="bolao-empty-state">
                 <i class="ri-lock-2-line"></i>
@@ -32,7 +37,7 @@ function renderBolaoState() {
                 <p>O bolão para essa partida logo mais será aberto, fique de olho!</p>
             </div>
         `;
-    } else if (currentBolaoState === 'AGUARDANDO') {
+    } else if (state === 'AGUARDANDO') {
         container.innerHTML = `
             <div class="bolao-empty-state">
                 <i class="ri-clipboard-line"></i>
@@ -40,44 +45,60 @@ function renderBolaoState() {
                 <p>Estamos fazendo o sorteio da escalação do bolão, em breve divulgaremos!</p>
             </div>
         `;
-    } else {
+    } else if (state === 'ABERTO') {
         container.innerHTML = `
             <div class="bolao-participants-list" id="bolao-participants-list"></div>
             
             <div class="bolao-insert-area" id="bolao-insert-area">
-                <p style="margin-bottom: 8px; font-weight: 600; font-size: 0.95rem;">Faça sua aposta:</p>
-                <select id="select-jogador" class="bolao-novo-input" style="margin-bottom: 12px;"></select>
+                <p class="bolao-blind-bet-text">Faça sua aposta às cegas:</p>
+                <select id="select-jogador" class="bolao-novo-input bolao-novo-input-margin"></select>
                 <input type="text" id="novo-participante-nome" class="bolao-novo-input" placeholder="Digite seu nome completo">
-                <button id="btn-bolao-salvar" class="btn-bolao btn-bolao-salvar" style="margin-top: 12px;">
+                <button id="btn-bolao-salvar" class="btn-bolao btn-bolao-salvar">
                     <i class="ri-check-line"></i> Confirmar Aposta</button>
             </div>
         `;
-        renderBolaoList();
+        renderBolaoList(state);
         
         const btnSalvar = document.getElementById('btn-bolao-salvar');
         if (btnSalvar) btnSalvar.addEventListener('click', salvarAposta);
+    } else if (state === 'FECHADO') {
+        container.innerHTML = `
+            <div class="bolao-revelados-header">
+                <h3><i class="ri-eye-line"></i> Jogadores Revelados!</h3>
+                <p>As apostas estão encerradas. Confira qual o seu jogador!</p>
+            </div>
+            <div class="bolao-participants-list" id="bolao-participants-list"></div>
+        `;
+        renderBolaoList(state);
     }
 }
 
-function renderBolaoList() {
+function renderBolaoList(state) {
     const list = document.getElementById('bolao-participants-list');
-    const select = document.getElementById('select-jogador');
-    if (!list || !select) return;
+    const select = document.getElementById('select-jogador'); 
+    if (!list) return;
 
     list.innerHTML = '';
-    select.innerHTML = '<option value="" disabled selected>Escolha um jogador disponível...</option>';
+    if (select) {
+        select.innerHTML = '<option value="" disabled selected>Escolha um número disponível...</option>';
+    }
 
-    jogadoresFlamengo.forEach(j => {
-        // Render Row
+    const jogadores = getBolaoJogadores();
+
+    jogadores.forEach(j => {
         const row = document.createElement('div');
         row.className = 'bolao-participant-row';
         
-        const isTaken = j.participante.trim().length > 0;
+        const isTaken = j.participante && j.participante.trim().length > 0;
+        
+        // LÓGICA PRINCIPAL: Se ABERTO, esconde o nome real. Se FECHADO, revela.
+        const nomeParaMostrar = state === 'FECHADO' 
+            ? (j.nomeJogador || 'Jogador Não Preenchido pelo Admin') 
+            : `Jogador ${j.id}`;
 
         row.innerHTML = `
             <div class="bolao-player-info">
-                <span class="bolao-participant-number">${j.id}.</span>
-                <span class="bolao-player-name">${j.nomeJogador}</span>
+                <span class="bolao-player-name">${nomeParaMostrar}</span>
             </div>
             <div class="bolao-participant-info">
                 ${isTaken ? `<span class="bolao-participant-name taken"><i class="ri-user-check-fill"></i> ${j.participante}</span>` : `<span class="bolao-participant-name free">Disponível</span>`}
@@ -85,11 +106,11 @@ function renderBolaoList() {
         `;
         list.appendChild(row);
 
-        // Render Option in Select if available
-        if (!isTaken) {
+        // Se está livre e estamos na fase de apostas, adiciona ao select
+        if (!isTaken && select) {
             const option = document.createElement('option');
             option.value = j.id;
-            option.textContent = `${j.id}. ${j.nomeJogador}`;
+            option.textContent = `Jogador ${j.id}`;
             select.appendChild(option);
         }
     });
@@ -105,7 +126,7 @@ function salvarAposta() {
     const participanteNome = inputNome.value.trim();
 
     if (!jogadorId) {
-        alert('Por favor, selecione um jogador disponível na lista.');
+        alert('Por favor, selecione uma vaga disponível na lista.');
         return;
     }
 
@@ -114,17 +135,36 @@ function salvarAposta() {
         return;
     }
 
-    const jogador = jogadoresFlamengo.find(j => j.id === jogadorId);
+    const jogadores = getBolaoJogadores();
+    const jogador = jogadores.find(j => j.id === jogadorId);
+    
     if (jogador) {
+        // Validação extra caso a vaga já tenha sido pega (útil para quando tivermos banco de dados real)
+        if (jogador.participante && jogador.participante.trim() !== '') {
+            alert('Ops! Alguém acabou de pegar essa vaga. Escolha outra.');
+            renderBolaoState(); 
+            return;
+        }
+
         jogador.participante = participanteNome;
+        saveBolaoJogadores(jogadores);
+        
         inputNome.value = '';
-        renderBolaoList();
-        alert(`Aposta confirmada! Se ${jogador.nomeJogador} fizer o 1º gol, você ganha o prêmio!`);
+        renderBolaoState();
+        alert(`Aposta confirmada no Jogador ${jogador.id}! Boa sorte, o nome real será revelado em breve!`);
     }
 }
 
+// Escuta por mudanças no localStorage feitas por outras abas (Painel Admin)
+// Isso permite que você atualize o admin e a página pública reaja quase em tempo real (F5 manual não é necessário se implementar evento storage, mas vamos forçar um reload visual)
+window.addEventListener('storage', (e) => {
+    if (e.key === 'bolao_mock_state' || e.key === 'bolao_mock_jogadores') {
+        renderBolaoState();
+    }
+});
+
 document.addEventListener('DOMContentLoaded', async () => {
-    // Renderiza o bolão pela primeira vez
+    // Renderiza o bolão com o estado atual
     renderBolaoState();
 
     // Carrega e renderiza o Próximo Jogo
@@ -140,7 +180,21 @@ document.addEventListener('DOMContentLoaded', async () => {
         containerPrincipal.innerHTML = ''; 
 
         if (jogosDaRodada.length > 0) {
-            const cardDestaque = new CardNextGame(jogosDaRodada);
+            const savedGameId = localStorage.getItem('bolao_mock_game_id');
+            let jogosOrdenados = [...jogosDaRodada];
+
+            // Se o admin selecionou um jogo específico para o bolão, forçamos ele a ser o primeiro
+            if (savedGameId) {
+                const targetGameId = Number(savedGameId);
+                const gameIndex = jogosOrdenados.findIndex(j => j.id === targetGameId);
+                
+                if (gameIndex > -1) {
+                    const selectedGame = jogosOrdenados.splice(gameIndex, 1)[0];
+                    jogosOrdenados.unshift(selectedGame); // Coloca na primeira posição
+                }
+            }
+
+            const cardDestaque = new CardNextGame(jogosOrdenados);
             cardDestaque.setAttribute('custom-title', 'Faça sua aposta');
             cardDestaque.setAttribute('custom-icon', 'ri-trophy-line');
             containerPrincipal.appendChild(cardDestaque);

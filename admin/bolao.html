@@ -28,21 +28,62 @@
                 </button>
             </div>
 
-            <div class="admin-content-padding">                
+            <div class="admin-content-padding">
+
+
+                <!-- Painel de Controle de Estado -->
+                <div class="bolao-state-panel">
+                    <div class="bolao-state-info">
+                        <h3>Status Atual: <span id="lbl-estado-atual" class="badge-estado inativo">INATIVO</span></h3>
+                        <p id="lbl-estado-desc">O bolão está fechado e aguardando configuração.</p>
+                    </div>
+                    <div class="bolao-state-actions">
+                        <button class="btn-state btn-inativo active" data-state="INATIVO"><i class="ri-lock-2-line"></i> Inativo</button>
+                        <button class="btn-state btn-aberto" data-state="ABERTO"><i class="ri-lock-unlock-line"></i> Aberto (Apostas)</button>
+                        <button class="btn-state btn-fechado" data-state="FECHADO"><i class="ri-eye-line"></i> Fechado (Revelado)</button>
+                    </div>
+                </div>
+
+
+                <!-- Seleção do Jogo -->
+                <div class="bolao-state-panel admin-jogo-panel">
+                    <div class="admin-jogo-wrapper">
+                        <label class="admin-jogo-label">
+                            <i class="ri-calendar-event-line"></i> Jogo do Bolão
+                        </label>
+                        <div class="admin-jogo-select-group">
+                            <select id="select-jogo-bolao" class="admin-jogo-select">
+                                <option value="">Carregando jogos...</option>
+                            </select>
+                            <button class="btn-primary" id="btn-salvar-jogo">
+                                <i class="ri-save-line"></i> Salvar Jogo
+                            </button>
+                        </div>
+                        
+                        <!-- Preview do Jogo -->
+                        <div id="admin-preview-game" class="admin-preview-game-wrapper">
+                            <div id="admin-preview-game-container"></div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="admin-accordion">
                     <button type="button" class="accordion-header" id="btn-toggle-jogadores">
                         <span><i class="ri-group-line"></i> Definir os 10 Jogadores</span>
                         <i class="ri-arrow-down-s-line icon-arrow"></i>
                     </button>
                     
-                    <div class="accordion-content" id="content-jogadores" style="display: none;">
+                    <div class="accordion-content" id="content-jogadores">
                         <form id="form-bolao-jogadores" class="bolao-jogadores-list">
-                            <div id="bolao-jogadores-container" style="display: flex; flex-direction: column; gap: 15px;">
+                            <div id="bolao-jogadores-container" class="bolao-jogadores-grid">
                             </div>
 
                             <div class="bolao-admin-actions">
+                                <button type="button" class="btn-secundary" id="btn-embaralhar-jogadores">
+                                    <i class="ri-shuffle-line"></i> Embaralhar Nomes
+                                </button>
                                 <button type="button" class="btn-primary" id="btn-salvar-jogadores">
-                                    <i class="ri-save-line"></i> Salvar Lista de Jogadores
+                                    <i class="ri-save-line"></i> Salvar Lista
                                 </button>
                             </div>
                         </form>

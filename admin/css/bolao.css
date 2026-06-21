@@ -4,6 +4,12 @@
     gap: 15px;
 }
 
+.bolao-jogadores-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
 .bolao-jogador-row {
     background: transparent;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -13,6 +19,8 @@
     align-items: center;
     gap: 20px;
     transition: border-color 0.2s;
+    width: calc(50% - 7.5px);
+    box-sizing: border-box;
 }
 
 .bolao-jogador-row:hover {
@@ -98,11 +106,14 @@
 .accordion-content {
     padding: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: none;
 }
 
 .bolao-admin-actions {
     display: flex;
+    flex-wrap: wrap;
     justify-content: flex-end;
+    gap: 10px;
     margin-top: 30px;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -122,6 +133,7 @@
     gap: 5px;
     transition: all 0.3s ease;
     font-family: inherit;
+    white-space: nowrap;
 }
 
 #btn-zerar-apostas:hover {
@@ -131,15 +143,219 @@
 }
 
 @media (max-width: 768px) {
+    .bolao-jogadores-grid {
+        flex-direction: column;
+    }
     .bolao-jogador-row {
         flex-direction: column;
         align-items: flex-start;
         gap: 15px;
+        width: 100%;
     }
     .bolao-jogador-input-group {
         width: 100%;
     }
     .bolao-jogador-number {
         display: none;
+    }
+    #btn-zerar-apostas {
+        width: 100%;
+        justify-content: center;
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+    .bolao-admin-actions {
+        flex-direction: column;
+    }
+    .bolao-admin-actions .btn-primary,
+    .bolao-admin-actions .btn-secundary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* --- Painel de Controle de Estado --- */
+.bolao-state-panel {
+    background: var(--black-fla-dark);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.bolao-state-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bolao-state-info p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.badge-estado {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.badge-estado.inativo { background: #555; color: #fff; }
+.badge-estado.aberto { background: #28a745; color: #fff; }
+.badge-estado.fechado { background: var(--red-fla); color: #fff; }
+
+.bolao-state-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.btn-state {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-state:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.btn-state.active.btn-inativo {
+    background: #555;
+    border-color: #555;
+}
+.btn-state.active.btn-aberto {
+    background: #28a745;
+    border-color: #28a745;
+}
+.btn-state.active.btn-fechado {
+    background: var(--red-fla);
+    border-color: var(--red-fla);
+}
+
+/* Esconde elementos desnecessários no preview do admin */
+#admin-preview-game-container card-next-game #title-next-game,
+#admin-preview-game-container card-next-game #btn-see-more-next-game {
+    display: none !important;
+}
+
+#admin-preview-game-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+#admin-preview-game-container .container-next-game {
+    margin-top: 0 !important;
+}
+
+#admin-preview-game-container card-next-game {
+    width: 100%;
+}
+
+/* --- Seleção de Jogo --- */
+.admin-jogo-panel {
+    margin-bottom: 30px;
+}
+
+.admin-jogo-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.admin-jogo-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.admin-jogo-label i {
+    color: var(--red-fla);
+    font-size: 1.2rem;
+}
+
+.admin-jogo-select-group {
+    display: flex;
+    gap: 15px;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+
+.admin-jogo-select {
+    flex: 1;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.4);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 12px 40px 12px 15px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+    cursor: pointer;
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: calc(100% - 10px) 50%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.admin-jogo-select:focus {
+    border-color: var(--red-fla);
+}
+
+#btn-salvar-jogo {
+    white-space: nowrap;
+    padding: 12px 24px;
+    height: auto;
+}
+
+.admin-preview-game-wrapper {
+    margin: 15px auto 0;
+    width: 100%;
+    max-width: 500px;
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .admin-jogo-select-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .admin-jogo-select {
+        width: 100%;
+    }
+    #btn-salvar-jogo {
+        width: 100%;
+        justify-content: center;
     }
 }
