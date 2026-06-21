@@ -190,3 +190,13 @@
     .col-labels .lbl-socio,
     .col-labels .lbl-normal { width: 72px; }
 }
+
+@media (max-width: 400px) {
+    .cardapio-page-item .col-socio,
+    .cardapio-page-item .col-normal,
+    .col-labels .lbl-socio,
+    .col-labels .lbl-normal { width: 58px; font-size: 0.75rem; }
+    .cardapio-page-item .col-divisor,
+    .col-labels .col-divisor { width: 6px; font-size: 0.7rem; }
+    .cardapio-page-item .item-nome { font-size: 0.95rem; }
+}

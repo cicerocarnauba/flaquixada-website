@@ -11,6 +11,7 @@ main .container-main {
     justify-content: space-between;
     align-items: flex-start;
     gap: 30px;
+    margin-top: 30px;
 }
 
 main .container-main > div-socio-fla,

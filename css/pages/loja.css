@@ -73,3 +73,9 @@ main .container-main {
     height: 50px;
     border-radius: 30px; /* Formato oval do botão de compra */
 }
+
+@media (max-width: 600px) {
+    main {
+        padding: 20px 12px;
+    }
+}

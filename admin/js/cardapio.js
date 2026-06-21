@@ -50,7 +50,7 @@ console.log("Admin Cardápio inicializado.");
             if (itens.length === 0) {
                 const liVazio = document.createElement('li');
                 liVazio.className = 'admin-item';
-                liVazio.innerHTML = `<span style="color:#999; padding: 16px;">Nenhum item cadastrado nesta categoria.</span>`;
+                liVazio.innerHTML = `<span class="empty-state-message">Nenhum item cadastrado nesta categoria.</span>`;
                 ul.appendChild(liVazio);
             } else {
                 itens.forEach(item => {

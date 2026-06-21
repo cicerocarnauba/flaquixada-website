@@ -117,11 +117,30 @@ main {
     .page-hero h1 { font-size: 1.5rem; }
 }
 
+@media (max-width: 400px) {
+    main {
+        padding: 20px 12px;
+    }
+}
+
 /* ===== GLOBAL SHIMMER ANIMATION ===== */
 @keyframes shimmer {
     0%   { background-position: 200% 0; }
     100% { background-position: -200% 0; }
 }
+
+/* ===== MENSAGENS DE ESTADO VAZIO ===== */
+.empty-state-message {
+    text-align: center;
+    color: var(--white-fla);
+    padding: 20px;
+    width: 100%;
+}
+
+.admin-only {
+    display: none;
+}
+
 
 a {
   text-decoration: none;

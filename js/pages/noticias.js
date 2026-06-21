@@ -26,7 +26,7 @@ function renderizarNoticias(noticias) {
     grid.innerHTML = '';
 
     if (noticias.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1 / -1; text-align: center; color: #fff;">Nenhuma notícia disponível no momento.</p>';
+        grid.innerHTML = '<p class="empty-state-message" style="grid-column: 1 / -1;">Nenhuma notícia disponível no momento.</p>';
         return;
     }
 

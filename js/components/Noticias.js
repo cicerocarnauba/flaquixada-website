@@ -38,7 +38,7 @@ class Noticias extends HTMLElement {
         container.innerHTML = '';
 
         if (!noticias || noticias.length === 0) {
-            container.innerHTML = '<p style="color: white; margin-top: 10px;">Nenhuma notícia disponível no momento.</p>';
+            container.innerHTML = '<p class="empty-state-message">Nenhuma notícia disponível no momento.</p>';
             return;
         }
 

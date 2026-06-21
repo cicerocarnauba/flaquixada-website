@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!containerPrincipal) return;
 
     const loader = document.createElement('div');
-    loader.innerHTML = '<p style="text-align: center; color: white;">Carregando jogos...</p>';
+    loader.innerHTML = '<p class="empty-state-message">Carregando jogos...</p>';
     containerPrincipal.appendChild(loader);
 
     try {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         containerPrincipal.innerHTML = ''; // Remove loader
 
         if (jogosDaRodada.length === 0) {
-            containerPrincipal.innerHTML = '<p style="text-align: center; color: white;">Nenhum jogo disponível no momento.</p>';
+            containerPrincipal.innerHTML = '<p class="empty-state-message">Nenhum jogo disponível no momento.</p>';
             return;
         }
 
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const cardDestaque = new CardNextGame(jogosDaRodada);
         containerPrincipal.appendChild(cardDestaque);
     } catch (error) {
-        containerPrincipal.innerHTML = '<p style="text-align: center; color: white;">Erro ao carregar jogos.</p>';
+        containerPrincipal.innerHTML = '<p class="empty-state-message">Erro ao carregar jogos.</p>';
         console.error("Erro renderizando CardNextGame:", error);
     }
 });
