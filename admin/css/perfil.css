@@ -69,6 +69,15 @@
     padding: 0 16px; 
     font-size: 1rem;
     color: var(--white-fla);
+    background: var(--black-fla-dark, #1E1E1E);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-with-icon .admin-input:focus {
+    border-color: var(--red-fla, #E11A22);
 }
 
 .disabled-input {
