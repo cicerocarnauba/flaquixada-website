@@ -5,7 +5,7 @@ async function carregarNoticias() {
     let noticias = [];
 
     try {
-        const res = await fetch('http://localhost:4000/api/noticias');
+        const res = await fetch('https://flaquixada-website.onrender.com/api/noticias');
         const data = await res.json();
         if (res.ok && data.success) {
             noticias = data.data;

@@ -100,7 +100,7 @@ function renderBolaoList(state, slots) {
         
         // Se FECHADO, mostra o jogador sorteado. Se ABERTO, esconde (Jogador 1, Jogador 2...)
         const nomeParaMostrar = state === 'FECHADO' 
-            ? slot.jogadorSorteado
+            ? escapeHTML(slot.jogadorSorteado)
             : `Jogador ${slot.numeroSlot}`;
 
         row.innerHTML = `
@@ -108,7 +108,7 @@ function renderBolaoList(state, slots) {
                 <span class="bolao-player-name">${nomeParaMostrar}</span>
             </div>
             <div class="bolao-participant-info">
-                ${isTaken ? `<span class="bolao-participant-name taken"><i class="ri-user-check-fill"></i> ${slot.participante}</span>` : `<span class="bolao-participant-name free">Disponível</span>`}
+                ${isTaken ? `<span class="bolao-participant-name taken"><i class="ri-user-check-fill"></i> ${escapeHTML(slot.participante)}</span>` : `<span class="bolao-participant-name free">Disponível</span>`}
             </div>
         `;
         list.appendChild(row);
@@ -153,6 +153,7 @@ async function salvarAposta() {
         alert(`Aposta confirmada no Jogador ${numeroSlot}! Boa sorte, o nome real será revelado em breve!`);
     } catch (error) {
         alert(error.message || 'Erro ao realizar a aposta. Tente novamente.');
+        await renderBolaoState(window.currentBolaoGameId);
     } finally {
         const btnSalvar = document.getElementById('btn-bolao-salvar');
         if (btnSalvar) btnSalvar.disabled = false;
@@ -206,3 +207,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         console.error("Erro inicialização do bolão:", error);
     }
 });
+
+function escapeHTML(str) {
+    if (typeof str !== 'string') return '';
+    return str.replace(/[&<>'"]/g, function(tag) {
+        const charsToReplace = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            "'": '&#39;',
+            '"': '&quot;'
+        };
+        return charsToReplace[tag] || tag;
+    });
+}
