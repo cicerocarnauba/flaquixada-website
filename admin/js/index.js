@@ -32,9 +32,9 @@ async function renderDashboard() {
     ];
 
     const actions = [
-        { link: 'noticias.html', icone: 'ri-edit-box-line', label: 'Nova Notícia', isButton: false },
+        { link: 'noticias.html?action=novo-item', icone: 'ri-edit-box-line', label: 'Nova Notícia', isButton: false },
         { link: 'cardapio.html?action=novo-item', icone: 'ri-restaurant-line', label: 'Adicionar ao Cardápio', isButton: false },
-        { link: 'loja.html?action=novo-item', icone: 'ri-shopping-bag-line', label: 'Adicionar Produto na Loja', isButton: false }
+        { link: 'loja.html?action=novo-produto', icone: 'ri-shopping-bag-line', label: 'Adicionar Produto na Loja', isButton: false }
     ];
 
     // Helpers para os botões de estado do bolão
