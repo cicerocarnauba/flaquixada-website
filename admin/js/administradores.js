@@ -8,7 +8,7 @@ const containerLista = document.getElementById('admin-list-container');
 const btnNovoAdmin = document.getElementById('btn-novo-admin');
 let modalComponent = null;
 
-const API_URL = 'http://localhost:4000/api/usuarios';
+const API_URL = 'https://flaquixada-website.onrender.com/api/usuarios';
 
 document.addEventListener('DOMContentLoaded', () => {
     setTimeout(() => {

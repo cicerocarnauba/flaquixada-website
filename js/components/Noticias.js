@@ -18,7 +18,7 @@ class Noticias extends HTMLElement {
     async carregarNoticias() {
         let noticias = [];
         try {
-            const response = await fetch('http://localhost:4000/api/noticias');
+            const response = await fetch('https://flaquixada-website.onrender.com/api/noticias');
             const data = await response.json();
             if (response.ok && data.success) {
                 // Pega apenas as últimas 3 notícias para a home

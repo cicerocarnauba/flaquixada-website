@@ -74,7 +74,7 @@ export default class AdminPerfil extends HTMLElement {
                         if (input.id === 'perfil-nome') payload.nome = input.value;
                         if (input.id === 'perfil-email') payload.email = input.value;
 
-                        const response = await fetch(`http://localhost:4000/api/usuarios/${user.id}`, {
+                        const response = await fetch(`https://flaquixada-website.onrender.com/api/usuarios/${user.id}`, {
                             method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json',
@@ -135,7 +135,7 @@ export default class AdminPerfil extends HTMLElement {
                 
                 // Nota: O backend atual não verifica a "senhaAtual" por padrão no PUT.
                 // Mas enviar a nova senha vai atualizar usando a rota PUT normal.
-                const response = await fetch(`http://localhost:4000/api/usuarios/${user.id}`, {
+                const response = await fetch(`https://flaquixada-website.onrender.com/api/usuarios/${user.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
