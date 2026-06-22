@@ -201,14 +201,11 @@ async function excluirProduto(id) {
 }
 
 // ----- BIND DO FORMULÁRIO (aguarda Web Component carregar) -----
-// O modal é um Web Component assíncrono, então aguardamos ele estar pronto
-customElements.whenDefined('modal-produto').then(() => {
-    setTimeout(() => {
-        const form = document.getElementById('form-produto');
-        if (form) {
-            form.addEventListener('submit', salvarProduto);
-        }
-    }, 300);
+// Usa event delegation no document para garantir que o submit seja pego
+document.addEventListener('submit', (e) => {
+    if (e.target && e.target.id === 'form-produto') {
+        salvarProduto(e);
+    }
 });
 
 // ----- INTEGRAÇÃO COM PARÂMETROS URL -----
