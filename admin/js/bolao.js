@@ -397,7 +397,7 @@ function limparApostaParticipante(id) {
     if (!confirm("Tem certeza que deseja remover esta aposta e resetar o pagamento?")) return;
     
     const jogadores = carregarJogadoresMock();
-    const index =调 = jogadores.findIndex(j => j.id === id);
+    const index = jogadores.findIndex(j => j.id === id);
     
     if (index !== -1) {
         jogadores[index].participante = "";
