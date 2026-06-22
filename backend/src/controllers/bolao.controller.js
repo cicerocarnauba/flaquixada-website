@@ -1,5 +1,5 @@
 import { BolaoService } from "../services/bolao.service.js";
-import { ApostaBolaoValidationSchema } from "../models/bolao.model.js";
+import { ApostaBolaoValidationSchema, ConfigBolaoValidationSchema, StatusBolaoValidationSchema, JogadoresBolaoValidationSchema } from "../models/bolao.model.js";
 import { z } from "zod";
 
 export class BolaoController {
@@ -81,6 +81,22 @@ export class BolaoController {
     }
   }
 
+  static async alterarNomeParticipante(req, res) {
+    try {
+      const { idJogo, numeroSlot } = req.params;
+      const { nome } = req.body;
+
+      if (!nome) {
+        return res.status(400).json({ success: false, error: "O campo nome é obrigatório." });
+      }
+
+      await BolaoService.atualizarNomeAposta(idJogo, numeroSlot, nome);
+      return res.status(200).json({ success: true, message: "Nome do participante alterado com sucesso!" });
+    } catch (error) {
+      return res.status(400).json({ success: false, error: error.message });
+    }
+  }
+
   static async limparJogo(req, res) {
     try {
       const { idJogo } = req.params;
@@ -88,6 +104,65 @@ export class BolaoController {
       return res.status(200).json({ success: true, message: "Dados do jogo apagados para economia de espaço!" });
     } catch (error) {
       return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+  static async alternarPagamento(req, res) {
+    try {
+      const { idJogo, numeroSlot } = req.params;
+      const resultado = await BolaoService.alternarPagamento(idJogo, numeroSlot);
+      return res.status(200).json({ success: true, message: "Status de pagamento alterado com sucesso!", data: resultado });
+    } catch (error) {
+      return res.status(400).json({ success: false, error: error.message });
+    }
+  }
+
+  static async obterConfiguracao(req, res) {
+    try {
+      const config = await BolaoService.obterConfiguracaoGlobais();
+      return res.status(200).json({ success: true, data: config });
+    } catch (error) {
+      return res.status(500).json({ success: false, error: error.message });
+    }
+  }
+
+  static async salvarConfiguracao(req, res) {
+    try {
+      const dadosValidados = ConfigBolaoValidationSchema.parse(req.body);
+      const config = await BolaoService.salvarConfiguracaoGlobais(dadosValidados.idJogoAtivo);
+      return res.status(200).json({ success: true, message: "Configuração global salva com sucesso!", data: config });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ success: false, detalhes: error.flatten().fieldErrors });
+      }
+      return res.status(400).json({ success: false, error: error.message });
+    }
+  }
+
+  static async alterarStatus(req, res) {
+    try {
+      const { idJogo } = req.params;
+      const dadosValidados = StatusBolaoValidationSchema.parse(req.body);
+      const resultado = await BolaoService.salvarStatusManual(idJogo, dadosValidados.status);
+      return res.status(200).json({ success: true, message: "Status alterado com sucesso!", data: resultado });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ success: false, detalhes: error.flatten().fieldErrors });
+      }
+      return res.status(400).json({ success: false, error: error.message });
+    }
+  }
+
+  static async salvarJogadores(req, res) {
+    try {
+      const { idJogo } = req.params;
+      const dadosValidados = JogadoresBolaoValidationSchema.parse(req.body);
+      const resultado = await BolaoService.salvarJogadoresManuais(idJogo, dadosValidados.jogadores);
+      return res.status(200).json({ success: true, message: "Jogadores salvos com sucesso!", data: resultado });
+    } catch (error) {
+      if (error instanceof z.ZodError) {
+        return res.status(400).json({ success: false, detalhes: error.flatten().fieldErrors });
+      }
+      return res.status(400).json({ success: false, error: error.message });
     }
   }
 }
