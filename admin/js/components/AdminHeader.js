@@ -15,7 +15,7 @@ class AdminHeader extends HTMLElement {
                 btnLogout.addEventListener('click', () => {
                     localStorage.removeItem('adminToken');
                     localStorage.removeItem('adminUser');
-                    window.location.href = '../login.html';
+                    window.location.href = '../index.html';
                 });
             }
 
