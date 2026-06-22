@@ -205,15 +205,14 @@ async function buscarSorteioCartola() {
         
         // Precisamos descobrir qual é o Flamengo
         let timeSorteado = null;
-        const selectedGame = loadedJogos.find(j => j.id == currentAdminGameId);
         
-        if (selectedGame) {
-            const isFlamengoMandante = selectedGame.timeCasa.toLowerCase().includes('flamengo');
-            timeSorteado = isFlamengoMandante ? sorteio.mandante : sorteio.visitante;
+        if (sorteio.mandante.nome.toLowerCase().includes('flamengo')) {
+            timeSorteado = sorteio.mandante.jogadores;
+        } else if (sorteio.visitante.nome.toLowerCase().includes('flamengo')) {
+            timeSorteado = sorteio.visitante.jogadores;
         } else {
-            // Fallback caso não encontre o jogo
-            if (sorteio.mandante && sorteio.mandante.length > 0) timeSorteado = sorteio.mandante;
-            else if (sorteio.visitante && sorteio.visitante.length > 0) timeSorteado = sorteio.visitante;
+            // Fallback caso o Flamengo não esteja no jogo (pega o mandante)
+            timeSorteado = sorteio.mandante.jogadores;
         }
 
         if (!timeSorteado || timeSorteado.length === 0) {

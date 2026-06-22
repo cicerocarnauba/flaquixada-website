@@ -42,8 +42,14 @@ export class BolaoService {
     }
 
     const resultadoSorteio = {
-      mandante: this.gerarCartela(escalacao.mandante.titulares),
-      visitante: this.gerarCartela(escalacao.visitante.titulares),
+      mandante: {
+        nome: escalacao.mandante.nome,
+        jogadores: this.gerarCartela(escalacao.mandante.titulares)
+      },
+      visitante: {
+        nome: escalacao.visitante.nome,
+        jogadores: this.gerarCartela(escalacao.visitante.titulares)
+      }
     };
 
     return resultadoSorteio;

@@ -128,6 +128,7 @@ export async function buscarEscalacao(idJogo) {
     // 3. Monta o objeto final idêntico à estrutura que o seu Front-end/Service espera ler
     return {
       mandante: {
+        nome: dadosPartidas.clubes[idMandante]?.nome || "Time Casa",
         treinador:
           extrairLista(idMandante).find((j) => j.posicao === "Técnico")?.nome ||
           "Técnico",
@@ -136,6 +137,7 @@ export async function buscarEscalacao(idJogo) {
           .slice(0, 11),
       },
       visitante: {
+        nome: dadosPartidas.clubes[idVisitante]?.nome || "Time Visitante",
         treinador:
           extrairLista(idVisitante).find((j) => j.posicao === "Técnico")
             ?.nome || "Técnico",
